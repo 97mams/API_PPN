@@ -1,18 +1,27 @@
 import { createServer } from "node:http"
+import { index } from "./Controller/product.js"
 const port = 3000
 const host = 'localhost'
 
-const callBack = (request, response) => {
-    const url = request.url
-    const route = new URL(url, `http://${host}:${port}`)
-    const enPoint = request.method + route.pathname
-    switch (enPoint) {
-        case 'GET/mams':
-            response.end(JSON.stringify({ name: "mams" }))
-            break;
+const callBack = async (request, response) => {
+    try {
+        const url = new URL(request.url, `http://${request.headers.host}`)
+        const endPoint = `${request.method}:${url.pathname}`
+        let results
+        switch (endPoint) {
+            case 'GET:/products':
+                results = await index()
+                break;
 
-        default:
-            break;
+            default:
+                break;
+        }
+        if (results) {
+            response.write(JSON.stringify(results))
+        }
+    } catch (error) {
+        response.writeHead(400)
+        console.log(error);
     }
     response.end()
 }
