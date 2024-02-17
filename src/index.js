@@ -10,7 +10,7 @@ const callBack = async (request, response) => {
         let results
         switch (endPoint) {
             case 'GET:/products':
-                results = await index()
+                results = await index(request, response)
                 break;
 
             default:
