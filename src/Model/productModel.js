@@ -1,11 +1,7 @@
 import { connect } from "./db.js"
 
-
-/**
- * return <promise>
- */
-export const getProduct = () => {
+export const getProduct = async () => {
     const sql = "SELECT * FROM products"
-    const [row] = connect.query(sql)
+    const [row] = await connect.query(sql)
     return row
 }
