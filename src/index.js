@@ -1,5 +1,5 @@
 import { createServer } from "node:http"
-import { index } from "./Controller/product.js"
+import { createProduct, index } from "./Controller/product.js"
 const port = 3000
 const host = 'localhost'
 
@@ -14,7 +14,7 @@ const callBack = async (request, response) => {
                 results = await index(request, response)
                 break;
             case 'POST:/products':
-                results = await create(request, response)
+                results = await createProduct(request, response)
                 break;
             default:
                 break;
