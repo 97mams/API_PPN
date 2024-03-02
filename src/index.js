@@ -13,7 +13,9 @@ const callBack = async (request, response) => {
             case 'GET:/products':
                 results = await index(request, response)
                 break;
-
+            case 'POST:/products':
+                results = await create(request, response)
+                break;
             default:
                 break;
         }
