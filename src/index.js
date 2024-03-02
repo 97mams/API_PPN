@@ -7,6 +7,7 @@ const callBack = async (request, response) => {
     try {
         const url = new URL(request.url, `http://${request.headers.host}`)
         const endPoint = `${request.method}:${url.pathname}`
+        response.setHeader('content-type', 'application/json')
         let results
         switch (endPoint) {
             case 'GET:/products':
