@@ -1,4 +1,4 @@
-import { getProduct } from "../Model/productModel.js"
+import { getProduct, addProduct } from "../Model/productModel.js"
 import { json } from "node:stream/consumers"
 
 export const index = async (request, response) => {
@@ -7,6 +7,7 @@ export const index = async (request, response) => {
 }
 
 export const createProduct = async (request, response) => {
+    response.writeHeader(200)
     const data = await json(request)
-    addProduct(data)
+    return await addProduct(data)
 }

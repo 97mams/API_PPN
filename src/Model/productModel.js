@@ -14,7 +14,8 @@ export const getProduct = async () => {
  * @return {Promise<Products>}
  */
 export const addProduct = async ({ name, type, price }) => {
-    const sql = "INSERTE INTO products(name, type, price) VALUES(?,?,?)"
-    const [row] = connect.query(sql, [name, type, parseFloat(price)])
-    console.log(row);
+    const sql = "INSERT INTO products(name, type, price) VALUES(?,?,?)"
+    const [row] = await connect.query(sql, [name, type, parseInt(price)])
+    const message = { message: "insert product successfull" }
+    return Object.assign(message, { name, type, price })
 }
